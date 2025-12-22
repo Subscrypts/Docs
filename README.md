@@ -49,7 +49,7 @@ The **Subscrypts Ecosystem** connects smart contracts, a powerful [dApp](https:/
 ## Join the Community
 
 <p align="center">
-  <a href="https://discord.gg/2U7qQy9GQm">
+  <a href="https://discord.gg/3C2YFkee">
     <img src="https://img.shields.io/badge/Join%20Discord-5865F2?logo=discord&amp;logoColor=white" alt="Join Discord Community" />
   </a>
   <a href="https://x.com/Subscrypts_com">
