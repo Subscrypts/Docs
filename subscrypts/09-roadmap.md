@@ -23,7 +23,7 @@ timeline
         Q4 2025: Platform Launch – Subscrypts goes live with initial features, onboarding early merchants and users, gathering feedback, and ensuring platform stability
     section 2026
         2026: Growth & Expansion – Focus on scaling up. Key efforts include onboarding more merchants (e.g., Web3 content creators), improving user experience, and optimizing the system’s performance. The core on-chain subscription service is continually refined to achieve product-market fit
-        End-2026: All tokens allocated to the public sale fully vest by around this time (the remaining 36 billion public tokens from TGE finish releasing), marking the completion of the initial distribution phase
+        End-2026: All tokens allocated to the public sale fully vest by around this time (the remaining 36 million public tokens from TGE finish releasing), marking the completion of the initial distribution phase
     section Beyond
         2027+: Future Developments – Continued expansion of features and services based on community feedback and regulatory developments. Potential exploration of new token utilities or cross-platform integrations, implemented cautiously and in compliance with regulations. Subscrypts commits to keeping the community informed of any major changes in direction or plans
 ```
