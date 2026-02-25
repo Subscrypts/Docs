@@ -1,0 +1,258 @@
+hooks:
+  - hooks.py
+
+site_name: Subscrypts Docs
+site_url: https://docs.subscrypts.com/
+site_description: >-
+  Complete documentation for the Subscrypts ecosystem —
+  blockchain-powered subscription management on Arbitrum One.
+repo_name: Subscrypts/subscrypts-docs
+repo_url: https://github.com/Subscrypts/subscrypts-docs
+edit_uri: edit/main/docs/
+
+copyright: >-
+  Copyright &copy; 2025–2026 Subscrypts. All rights reserved.
+
+theme:
+  name: material
+  custom_dir: overrides
+  logo: assets/img/logo.png
+  favicon: assets/img/favicon.png
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+    annotation: material/plus-circle
+    tag:
+      default: material/tag
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - header.autohide
+    - announce.dismiss
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - search.suggest
+    - search.highlight
+  palette:
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  language: en
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.mark
+  - pymdownx.keys
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+plugins:
+  - search
+  - awesome-pages
+  - redirects:
+      redirect_maps:
+        # subscrypts/ — old numbered filenames → new clean names
+        'subscrypts/01-introduction.md': 'subscrypts/introduction.md'
+        'subscrypts/02-vision.md': 'subscrypts/vision.md'
+        'subscrypts/03-solution.md': 'subscrypts/solution.md'
+        'subscrypts/04-architecture.md': 'subscrypts/architecture.md'
+        'subscrypts/05-useCases.md': 'subscrypts/use-cases.md'
+        'subscrypts/06-tokenomics.md': 'subscrypts/tokenomics.md'
+        'subscrypts/07-publicSale.md': 'subscrypts/public-sale.md'
+        'subscrypts/08-compliance.md': 'subscrypts/compliance.md'
+        'subscrypts/09-roadmap.md': 'subscrypts/roadmap.md'
+        # smart-contract/ — old numbered filenames → new clean names
+        'smart-contract/01-introduction.md': 'smart-contract/introduction.md'
+        'smart-contract/02-design.md': 'smart-contract/design.md'
+        'smart-contract/03-architecture-overview.md': 'smart-contract/architecture.md'
+        'smart-contract/04-core-logic.md': 'smart-contract/core-logic.md'
+        'smart-contract/05-payment-conversion.md': 'smart-contract/payment-conversion.md'
+        'smart-contract/06-data-structures.md': 'smart-contract/data-structures.md'
+        'smart-contract/07-access-control.md': 'smart-contract/access-control.md'
+        'smart-contract/08-events-integrations.md': 'smart-contract/events-integrations.md'
+        'smart-contract/09-gas-optimization.md': 'smart-contract/gas-optimization.md'
+        'smart-contract/10-security-auditing.md': 'smart-contract/security-auditing.md'
+        'smart-contract/11-abi-reference.md': 'smart-contract/abi-reference.md'
+        'smart-contract/12-token-integration.md': 'smart-contract/token-integration.md'
+        'smart-contract/13-deployment.md': 'smart-contract/deployment.md'
+        'smart-contract/14-compliance.md': 'smart-contract/compliance.md'
+        'smart-contract/16-future-development.md': 'smart-contract/future-development.md'
+        # dapp/ — old numbered filenames → new clean names
+        'dapp/01-introduction.md': 'dapp/introduction.md'
+        'dapp/02-current-capabilities.md': 'dapp/features.md'
+        'dapp/03-user-experience.md': 'dapp/subscriber-guide.md'
+        'dapp/04-merchant-features.md': 'dapp/merchant-guide.md'
+        'dapp/05-wallet-connection.md': 'dapp/wallet-connection.md'
+        'dapp/06-interact-page.md': 'dapp/interact-page.md'
+        'dapp/07-smart-contract-functions.md': 'dapp/smart-contract-functions.md'
+        'dapp/08-access-control-and-outputs.md': 'dapp/access-control.md'
+        'dapp/09-future-direction.md': 'dapp/future-direction.md'
+        # discord-bot/ — old numbered filenames → new clean names
+        'discord-bot/01-introduction.md': 'discord-bot/introduction.md'
+        'discord-bot/02-solution-and-usecases.md': 'discord-bot/solution-and-usecases.md'
+        'discord-bot/03-architecture-and-integration.md': 'discord-bot/architecture.md'
+        'discord-bot/04-getting-started-for-admins.md': 'discord-bot/admin-setup-guide.md'
+        'discord-bot/05-getting-started-for-members.md': 'discord-bot/member-guide.md'
+        'discord-bot/06-commands-reference.md': 'discord-bot/commands-reference.md'
+        'discord-bot/07-subscription-synchronization.md': 'discord-bot/subscription-sync.md'
+        'discord-bot/08-security-and-trust.md': 'discord-bot/security-and-trust.md'
+        'discord-bot/09-best-practices-and-troubleshooting.md': 'discord-bot/best-practices.md'
+        'discord-bot/10-future-direction.md': 'discord-bot/future-direction.md'
+  - minify:
+      minify_html: true
+  - tags
+  - social:
+      cards_layout_options:
+        font_family: Inter
+        background_color: "#0D1117"
+        color: "#E6EDF3"
+
+extra:
+  social:
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/Subscrypts_com
+      name: Subscrypts on X
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/5nT5HcxMEg
+      name: Subscrypts Discord
+    - icon: fontawesome/brands/github
+      link: https://github.com/Subscrypts
+      name: Subscrypts on GitHub
+    - icon: material/web
+      link: https://subscrypts.com
+      name: Subscrypts Homepage
+    - icon: material/application-outline
+      link: https://app.subscrypts.com
+      name: Subscrypts dApp
+  status:
+    new: Recently added
+    beta: In development
+    updated: Recently updated
+  generator: false
+
+extra_css:
+  - css/overrides.css
+
+extra_templates:
+  - sitemap.xml
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - getting-started/index.md
+      - What is Subscrypts?: getting-started/what-is-subscrypts.md
+      - For Subscribers: getting-started/for-subscribers.md
+      - For Merchants: getting-started/for-merchants.md
+      - For Developers: getting-started/for-developers.md
+  - Subscrypts:
+      - subscrypts/index.md
+      - Introduction: subscrypts/introduction.md
+      - Vision: subscrypts/vision.md
+      - Solution: subscrypts/solution.md
+      - Architecture: subscrypts/architecture.md
+      - Use Cases: subscrypts/use-cases.md
+      - Tokenomics: subscrypts/tokenomics.md
+      - Public Sale: subscrypts/public-sale.md
+      - Compliance: subscrypts/compliance.md
+      - Roadmap: subscrypts/roadmap.md
+  - Smart Contract:
+      - smart-contract/index.md
+      - Introduction: smart-contract/introduction.md
+      - Design Philosophy: smart-contract/design.md
+      - Architecture: smart-contract/architecture.md
+      - Core Logic: smart-contract/core-logic.md
+      - Payment & Conversion: smart-contract/payment-conversion.md
+      - Data Structures: smart-contract/data-structures.md
+      - Access Control: smart-contract/access-control.md
+      - Events & Integrations: smart-contract/events-integrations.md
+      - Gas Optimization: smart-contract/gas-optimization.md
+      - Security & Auditing: smart-contract/security-auditing.md
+      - ABI Reference: smart-contract/abi-reference.md
+      - Token Integration: smart-contract/token-integration.md
+      - Deployment: smart-contract/deployment.md
+      - Compliance: smart-contract/compliance.md
+      - Future Development: smart-contract/future-development.md
+  - dApp:
+      - dapp/index.md
+      - Introduction: dapp/introduction.md
+      - Features: dapp/features.md
+      - Subscriber Guide: dapp/subscriber-guide.md
+      - Merchant Guide: dapp/merchant-guide.md
+      - Wallet Connection: dapp/wallet-connection.md
+      - Interact Page: dapp/interact-page.md
+      - Smart Contract Functions: dapp/smart-contract-functions.md
+      - Access Control: dapp/access-control.md
+      - Future Direction: dapp/future-direction.md
+  - Discord Bot:
+      - discord-bot/index.md
+      - Introduction: discord-bot/introduction.md
+      - Solution & Use Cases: discord-bot/solution-and-usecases.md
+      - Architecture: discord-bot/architecture.md
+      - Admin Setup Guide: discord-bot/admin-setup-guide.md
+      - Member Guide: discord-bot/member-guide.md
+      - Commands Reference: discord-bot/commands-reference.md
+      - Subscription Sync: discord-bot/subscription-sync.md
+      - Security & Trust: discord-bot/security-and-trust.md
+      - Best Practices: discord-bot/best-practices.md
+      - Future Direction: discord-bot/future-direction.md
+  - SDK:
+      - sdk/index.md
+      - Quick Start: sdk/quick-start.md
+      - Provider Setup: sdk/provider-setup.md
+      - Hooks Reference: sdk/hooks-reference.md
+      - Components: sdk/components-reference.md
+      - Wallet Connectors: sdk/wallet-connectors.md
+      - Code Examples: sdk/code-examples.md
+  - Resources:
+      - resources/index.md
+      - FAQ: resources/faq.md
+      - Glossary: resources/glossary.md
+      - Comparisons:
+          - vs Traditional Payments: resources/vs-traditional-payments.md
+          - vs Superfluid: resources/vs-superfluid.md
+          - vs Unlock Protocol: resources/vs-unlock-protocol.md
+      - How to Accept Crypto Subscriptions: resources/accept-crypto-subscriptions.md

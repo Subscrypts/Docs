@@ -1,0 +1,43 @@
+# Infrastructure (internal — not for public repo)
+docker-compose.yml
+docker-compose.*.yml
+
+# Claude Code (internal AI config and session notes)
+.claude/
+
+# Internal working documents
+AUDIT-REPORT.md
+CONTENT-STRATEGY-AUDIT.md
+DESIGN-AUDIT.md
+CHANGELOG.md
+
+# Smart contract reference (closed source)
+smartcontract-reference/
+
+# MkDocs build output
+site/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temp files
+*.tmp
+*.bak
+*.log
