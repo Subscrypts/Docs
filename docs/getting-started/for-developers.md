@@ -203,6 +203,18 @@ For full function signatures and parameters, see the [ABI Reference](../smart-co
 
 ---
 
+## Ecosystem Integrations
+
+The same on-chain events and view functions that power your custom integration also power the Subscrypts ecosystem tools:
+
+* **[Discord Bot](../discord-bot/introduction.md)** — Listens to `_subscriptionPay` and `_subscriptionStop` to manage Discord role access
+* **[Telegram Bot](../telegram-bot/introduction.md)** — Uses the same events for Telegram group membership enforcement
+* **[Subscrypts Pulse](../pulse/introduction.md)** — Monitors subscription state and sends push notifications to subscribers
+
+All ecosystem integrations are cross-platform: a subscription created via the SDK or ABI can be verified and enforced by the Discord Bot, Telegram Bot, Pulse, and any other service reading on-chain state.
+
+---
+
 ## What's Next?
 
 <div class="grid cards" markdown>

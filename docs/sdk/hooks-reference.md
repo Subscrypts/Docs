@@ -1,7 +1,6 @@
 ---
 title: Hooks API Reference
 description: Complete API reference for all Subscrypts React SDK hooks with signatures, return types, and code examples.
-status: new
 tags:
   - SDK
   - hooks

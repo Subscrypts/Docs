@@ -1,6 +1,6 @@
 ---
 title: Subscrypts Docs — Blockchain Subscription Management on Arbitrum
-description: Complete documentation for the Subscrypts ecosystem — on-chain subscription management, the SUBS token, dApp, Discord Bot, and React SDK.
+description: Complete documentation for the Subscrypts ecosystem — on-chain subscription management, the SUBS token, dApp, Discord Bot, Telegram Bot, Pulse, and React SDK.
 hide:
   - navigation
   - toc
@@ -35,7 +35,7 @@ This documentation covers every component of the Subscrypts ecosystem — from h
 
     ---
 
-    Accept crypto subscriptions, monetize Discord communities, and keep 99% of every payment.
+    Accept crypto subscriptions, monetize Discord and Telegram communities, and keep 99% of every payment.
 
     [:octicons-arrow-right-24: Merchant guide](getting-started/for-merchants.md)
 
@@ -95,6 +95,22 @@ This documentation covers every component of the Subscrypts ecosystem — from h
 
     [:octicons-arrow-right-24: Bot documentation](discord-bot/introduction.md)
 
+-   :material-send:{ .lg .middle } __Telegram Bot__
+
+    ---
+
+    Gate Telegram groups and channels with on-chain subscription verification and automated membership management.
+
+    [:octicons-arrow-right-24: Bot documentation](telegram-bot/introduction.md)
+
+-   :material-pulse:{ .lg .middle } __Subscrypts Pulse__
+
+    ---
+
+    Monitor subscriptions in real time, track balances, and receive push notifications — installable as a PWA.
+
+    [:octicons-arrow-right-24: Pulse documentation](pulse/introduction.md)
+
 -   :material-package-variant:{ .lg .middle } __React SDK__
 
     ---
@@ -137,6 +153,18 @@ This documentation covers every component of the Subscrypts ecosystem — from h
 
     Add the bot to your server
 
+-   :material-send:{ .lg .middle } __[Telegram Bot](https://telegram.onsubscrypts.com){ target=_blank }__
+
+    ---
+
+    Add the bot to your group
+
+-   :material-pulse:{ .lg .middle } __[Subscrypts Pulse](https://pulse.subscrypts.com){ target=_blank }__
+
+    ---
+
+    Monitor your subscriptions
+
 -   :material-file-document:{ .lg .middle } __[Whitepaper](https://subscrypts.com/whitepaper){ target=_blank }__
 
     ---
@@ -164,7 +192,7 @@ This documentation covers every component of the Subscrypts ecosystem — from h
 ## Join the Community
 
 <p align="center">
-  <a href="https://discord.gg/5nT5HcxMEg">
+  <a href="https://discord.gg/6uYzBUhAj7">
     <img src="https://img.shields.io/badge/Join%20Discord-5865F2?logo=discord&amp;logoColor=white" alt="Join Discord Community" />
   </a>
   <a href="https://x.com/Subscrypts_com">

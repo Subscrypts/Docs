@@ -29,7 +29,7 @@ Accept recurring crypto payments, keep 99% of every payment, and reach subscribe
 
 ---
 
-## Two Ways to Get Started
+## Three Ways to Get Started
 
 ### Path A: Monetize a Discord Community
 
@@ -43,7 +43,19 @@ Best for: community creators, educators, gaming servers, content creators.
 
 For the full walkthrough, see the [Discord Bot Admin Setup Guide](../discord-bot/admin-setup-guide.md).
 
-### Path B: Use the dApp for Any Service
+### Path B: Monetize a Telegram Group
+
+Best for: Telegram communities, trading groups, alpha channels, educational content.
+
+1. **Add the bot** — Visit [telegram.onsubscrypts.com](https://telegram.onsubscrypts.com) and add the Subscrypts Telegram Bot to your group
+2. **Run initial setup** — In your group, run `/admin setup` to verify permissions
+3. **Create a subscription plan** — Create plans on-chain at [telegram.onsubscrypts.com](https://telegram.onsubscrypts.com)
+4. **Map plan to group** — The bot maps your plans to the group for membership enforcement
+5. **You're live** — Members can subscribe, link their wallets, and receive single-use invite links. The bot handles join gating and expired member removal automatically.
+
+For the full walkthrough, see the [Telegram Bot Admin Setup Guide](../telegram-bot/admin-setup-guide.md).
+
+### Path C: Use the dApp for Any Service
 
 Best for: SaaS platforms, content sites, streaming services, API billing.
 
@@ -106,7 +118,7 @@ You have two pricing options:
 - [ ] Install MetaMask (or compatible wallet)
 - [ ] Add Arbitrum One network to your wallet
 - [ ] Fund wallet with a small amount of ETH for gas
-- [ ] Choose your path: Discord Bot or dApp
+- [ ] Choose your path: Discord Bot, Telegram Bot, or dApp
 - [ ] Create your first subscription plan
 - [ ] Share the plan link with your audience
 - [ ] (Discord only) Map your plan to premium roles
@@ -151,7 +163,9 @@ For full compliance details, see [Compliance](../subscrypts/compliance.md).
 ## Related Topics
 
 - [Discord Bot Admin Setup Guide](../discord-bot/admin-setup-guide.md) — Full Discord monetization walkthrough
+- [Telegram Bot Admin Setup Guide](../telegram-bot/admin-setup-guide.md) — Full Telegram monetization walkthrough
 - [dApp Merchant Guide](../dapp/merchant-guide.md) — Detailed dApp merchant features
+- [Subscrypts Pulse](../pulse/introduction.md) — Encourage subscribers to monitor their subscriptions
 - [Tokenomics](../subscrypts/tokenomics.md) — SUBS token supply and distribution
 - [Smart Contract Core Logic](../smart-contract/core-logic.md) — How payments work under the hood
 - [FAQ](../resources/faq.md) — Common merchant questions

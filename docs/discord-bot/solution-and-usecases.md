@@ -121,7 +121,7 @@ Subscrypts is building an **entirely new monetization layer** for Discord:
 > Whether you're a creator, educator, developer, or brand — if you use Discord, you can monetize **without friction**.
 
 !!! ecosystem "Subscrypts Ecosystem"
-    The Discord Bot leverages the same smart contract suite used by the [Subscrypts dApp](../dapp/introduction.md) and the [Subscrypts SDK](../sdk/index.md). Subscription plans created through any interface are interoperable across the ecosystem.
+    The Discord Bot leverages the same smart contract suite used by the [Subscrypts dApp](../dapp/introduction.md), the [Telegram Bot](../telegram-bot/introduction.md), and the [Subscrypts SDK](../sdk/index.md). Subscription plans created through any interface are interoperable across the ecosystem — one subscription can gate access to Discord, Telegram, websites, and more.
 
 ---
 
@@ -132,3 +132,4 @@ Subscrypts is building an **entirely new monetization layer** for Discord:
 - [Member Guide](member-guide.md) -- The subscriber experience from wallet linking to access
 - [Smart Contract Suite](../smart-contract/introduction.md) -- On-chain subscription logic and plan creation
 - [Subscrypts dApp](../dapp/introduction.md) -- The general-purpose web interface for managing subscriptions
+- [Telegram Bot Solution & Use Cases](../telegram-bot/solution-and-usecases.md) -- Looking to gate Telegram groups instead?

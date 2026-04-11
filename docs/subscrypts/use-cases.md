@@ -38,10 +38,11 @@ Thanks to [Subscrypts](https://subscrypts.com)' modular, event-driven design, in
 
 **Subscrypts Solution:**
 
-* Deploy subscription plans with [Subscrypts Discord Bot](https://discord.onsubscrypts.com) integration.
-* Members link their Ethereum wallet to Discord.
-* The Discord bot checks on-chain status and assigns roles based on subscription.
-* Failed or expired subscriptions revoke access to gated channels.
+* Deploy subscription plans with [Subscrypts Discord Bot](https://discord.onsubscrypts.com) or [Subscrypts Telegram Bot](https://telegram.onsubscrypts.com) integration.
+* Members link their Ethereum wallet to Discord or Telegram.
+* The bot checks on-chain status and assigns roles or manages group membership based on subscription.
+* Failed or expired subscriptions revoke access to gated channels or groups.
+* Subscribers can use [Subscrypts Pulse](https://pulse.subscrypts.com) to monitor their subscriptions and receive expiry notifications.
 
 **Added Value:**
 

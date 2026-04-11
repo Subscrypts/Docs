@@ -1,6 +1,30 @@
-# Infrastructure (internal — not for public repo)
+# ============================================
+# GitHub repo contains ONLY:
+#   - README.md
+#   - .gitignore
+#   - docs/**/*.md (excluding tags.md)
+# Everything else is excluded.
+# ============================================
+
+# Build tooling and infrastructure
+Dockerfile
 docker-compose.yml
 docker-compose.*.yml
+.dockerignore
+mkdocs.yml
+hooks.py
+server.py
+requirements.txt
+overrides/
+
+# Non-markdown docs content
+docs/assets/
+docs/css/
+docs/robots.txt
+docs/sitemap.xml
+docs/tags.md
+docs/llms.txt
+docs/llms-full.txt
 
 # Claude Code (internal AI config and session notes)
 .claude/
@@ -13,6 +37,9 @@ CHANGELOG.md
 
 # Smart contract reference (closed source)
 smartcontract-reference/
+
+# GitHub CI (not needed — no CI pipeline for docs-only repo)
+.github/
 
 # MkDocs build output
 site/

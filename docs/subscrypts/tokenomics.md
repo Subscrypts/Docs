@@ -121,6 +121,75 @@ Future utility extensions (such as loyalty mechanisms or ecosystem incentives) m
 
 ---
 
+## Why a Custom Settlement Token?
+
+A common and fair question is: *why does Subscrypts use its own token instead of settling directly in USDC or another existing ERC-20?*
+
+The short answer is that SUBS is not a branding exercise — it is an architectural decision that enables a fundamentally different (and safer) payment model than what standard ERC-20 tokens allow. Below are the specific technical reasons, followed by an honest look at the trade-offs.
+
+### Burn-and-Mint with Per-Subscription Authorization
+
+Traditional ERC-20 payment flows require users to call `approve()`, granting a smart contract permission to spend tokens from their wallet via `transferFrom()`. This creates a **blanket allowance** — one approval gives the contract access to the approved amount regardless of purpose.
+
+SUBS replaces this model entirely. The Subscrypts smart contract uses a **burn-and-mint** mechanism: when a payment is due, the contract burns SUBS from the subscriber's wallet and mints 99% to the merchant and 1% to the protocol treasury — all in a single atomic transaction.
+
+Crucially, the contract can only execute this burn when the on-chain `Subscription` record permits it. Each subscription has its own `isRecurring` flag and `remainingCycles` counter. The payment function checks these fields before any deduction occurs:
+
+- **Subscription A** cannot trigger a payment meant for **Subscription B**, even though the same contract manages both.
+- There is no shared allowance pool that multiple subscriptions draw from.
+- Authorization lives in the subscription record itself, not in a blanket token approval.
+
+This per-subscription authorization model is only possible because Subscrypts controls the SUBS token contract. A standard ERC-20 like USDC has no concept of per-subscription scoping — `approve()` is all-or-nothing.
+
+### User Wallet Protection
+
+Because SUBS uses burn-and-mint instead of `approve`/`transferFrom`, users **never grant the Subscrypts contract spending permission on their USDC, DAI, or other stablecoin holdings**. Their stablecoin balances remain completely untouched by the contract.
+
+Why this matters: in a hypothetical smart contract exploit, an attacker who compromises a traditional subscription contract could drain the approved token balance from every user who ever called `approve()`. With the SUBS model, only the SUBS tokens within a user's wallet are within scope — their stablecoins and other assets are not exposed to the contract at all.
+
+This creates a clear **isolation boundary** between the subscription system and the rest of a user's portfolio.
+
+### Independence from External Contracts
+
+If Subscrypts relied on USDC (or any third-party token) as its settlement currency, the protocol's core functionality would be subject to decisions made by that token's issuer. This is not a theoretical concern:
+
+- Circle (USDC issuer) has frozen addresses and blacklisted wallets in the past.
+- USDC's smart contract has been upgraded, changing its behavior.
+- Regulatory changes could force an issuer to add restrictions, modify compliance rules, or alter transfer logic.
+
+Because all core subscription settlement happens in SUBS, none of these external decisions can interrupt Subscrypts' primary payment flows. The protocol's ability to process subscriptions has **zero dependency on third-party token governance**.
+
+### Resilience Against External Exploits
+
+If an external token were compromised — through a minting exploit, unauthorized freeze, pause, or any other breach — and Subscrypts depended on that token for settlement, the entire subscription system would halt with no recourse.
+
+With SUBS as the settlement layer, external token issues are **contained**. The smart contract includes a `contractHaltCurrencyUSD` flag that allows administrators to immediately disable USDC-based payments while all SUBS-based subscriptions continue operating normally. This is not a theoretical safeguard — the emergency halt mechanism is deployed and ready in the live contract.
+
+### Flexible Multi-Token Payments
+
+Using SUBS as a unified settlement layer makes it straightforward to accept payments in **any** ERC-20 token. Adding support for a new payment token (such as DAI or WETH) only requires adding a swap path through a decentralized exchange — the settlement logic remains unchanged.
+
+The existing [USDC integration](../smart-contract/payment-conversion.md) proves this pattern works: subscribers can pay with USDC, which is atomically swapped to SUBS via Uniswap V3 before settlement. Merchants always receive SUBS regardless of what the subscriber originally paid with, ensuring consistent accounting.
+
+### Native Background Settlement
+
+Because Subscrypts controls the SUBS token contract, the passive subscription collection function (`subscriptionCollectPassive`) is embedded directly into every contract interaction — swaps, transfers, and manual payments. Expired or due subscriptions are collected as a **side effect of normal platform activity**, creating an always-on background settlement engine.
+
+If the protocol relied on an external token, triggering recurring payments would require dependency on external hooks, keeper networks, or separate automation services — adding complexity, cost, and potential points of failure. With SUBS, the settlement process runs natively within the contract itself, delivering a subscription experience as seamless as traditional recurring billing.
+
+### Trade-offs
+
+Transparency matters, and the SUBS settlement model does introduce real costs:
+
+- **Additional step for new users** — Subscribers need to acquire SUBS before paying, or use the built-in [USDC auto-swap](../smart-contract/payment-conversion.md) which handles conversion in a single atomic transaction.
+- **Price volatility** — SUBS is more volatile than stablecoins. This is mitigated by [fiat-denominated pricing](solution.md): merchants can price plans in USD, and the smart contract calculates the equivalent SUBS amount at the real-time market rate via Uniswap V3 for each payment.
+- **Liquidity dependency** — Settlement quality depends on the depth of the SUBS/USDC liquidity pool on Uniswap. Shallow liquidity could result in higher slippage for USDC-to-SUBS conversions.
+- **Extra gas for conversions** — Payments made in USDC incur additional gas for the on-chain swap compared to direct SUBS payments.
+
+These trade-offs are the cost of the architectural benefits described above. The design philosophy is that **security, independence, and user protection** outweigh the additional friction — especially given that the USDC auto-swap and fiat-denominated pricing mitigate the most visible impact on end users.
+
+---
+
 ## Use of Proceeds
 
 Funds raised during the SUBS token sale (via USDC, ETH, or other crypto-assets) are transferred directly to the **[Subscrypts](https://subscrypts.com) treasury**, which is secured by a multi-signature wallet.

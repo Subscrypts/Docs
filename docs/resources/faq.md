@@ -36,6 +36,15 @@ Find answers to the most common questions about Subscrypts, organized by topic. 
 ??? question "Q: Is Subscrypts compliant with EU regulations?"
     Subscrypts is designed from the ground up to align with the EU Markets in Crypto-Assets Regulation (MiCAR) — Regulation (EU) 2023/1114. The project publishes a MiCAR-compliant whitepaper with transparent risk disclosures, token classification, and issuer obligations. For full compliance details, see [Compliance](../subscrypts/compliance.md).
 
+??? question "Q: Does Subscrypts work with Telegram?"
+    Yes. The [Subscrypts Telegram Bot](https://telegram.onsubscrypts.com) gates Telegram group and channel access using on-chain subscriptions. Group owners add the bot, create subscription plans, and the bot handles membership enforcement automatically — including join gating, expired member removal, and single-use invite links. See the [Telegram Bot documentation](../telegram-bot/introduction.md) for details.
+
+??? question "Q: What is Subscrypts Pulse?"
+    [Subscrypts Pulse](https://pulse.subscrypts.com) is a real-time subscription monitoring PWA (Progressive Web App). It tracks your active subscriptions, monitors token balances, and sends push notifications for payments, expirations, and low balance warnings. Pulse is read-only and custodian-free — it never asks for private keys. See the [Pulse documentation](../pulse/introduction.md) for details.
+
+??? question "Q: Can one subscription work across Discord and Telegram?"
+    Yes. Subscrypts subscriptions are **cross-platform**. One active on-chain subscription can gate access to Discord (via the [Discord Bot](../discord-bot/introduction.md)), Telegram (via the [Telegram Bot](../telegram-bot/introduction.md)), websites (via the [SDK](../sdk/index.md)), or any other service that reads on-chain subscription state. The blockchain is the shared source of truth.
+
 ---
 
 ## For Subscribers
@@ -58,6 +67,12 @@ Find answers to the most common questions about Subscrypts, organized by topic. 
 ??? question "Q: Are there any fees on my side as a subscriber?"
     The 1% platform fee is deducted from the merchant's share, not yours. As a subscriber, you pay only the listed subscription price plus a small Arbitrum gas fee (typically $0.01-$0.05 per transaction). There are no hidden charges.
 
+??? question "Q: How do I monitor my subscriptions?"
+    Use [Subscrypts Pulse](https://pulse.subscrypts.com) to track all your active subscriptions, upcoming payments, and token balances in one place. Pulse sends push notifications before subscriptions expire so you can renew on time. It's installable as a PWA on any device — no app store needed. See the [Pulse documentation](../pulse/introduction.md).
+
+??? question "Q: How do I join a gated Telegram group?"
+    Open the group's subscribe link, connect your wallet, and subscribe to a plan on-chain. Then link your wallet via SIWE (a gasless signature that proves wallet ownership). The bot verifies your subscription and sends you a single-use invite link via Telegram DM. See the [Telegram Member Guide](../telegram-bot/member-guide.md) for a step-by-step walkthrough.
+
 ---
 
 ## For Merchants
@@ -79,6 +94,12 @@ Find answers to the most common questions about Subscrypts, organized by topic. 
 
 ??? question "Q: Can I convert my SUBS revenue to stablecoins or fiat?"
     Yes, you can swap SUBS to USDC at any time using the dApp's built-in swap page, any Uniswap interface on Arbitrum, or bridge to Ethereum mainnet for withdrawal through a centralized exchange. See [Getting Started for Merchants](../getting-started/for-merchants.md) for off-ramping details.
+
+??? question "Q: How do I set up the Telegram Bot for my group?"
+    Add the [Subscrypts Telegram Bot](https://telegram.onsubscrypts.com) to your Telegram group, run `/admin setup` to verify permissions, create subscription plans at [telegram.onsubscrypts.com](https://telegram.onsubscrypts.com), and the bot handles the rest — join gating, membership enforcement, and single-use invite links. See the [Telegram Bot Admin Setup Guide](../telegram-bot/admin-setup-guide.md) for the full walkthrough.
+
+??? question "Q: Can I migrate an existing Telegram group to Subscrypts?"
+    Yes. The Telegram Bot offers a **migration mode** that gives existing free members a configurable grace period (1–90 days) to subscribe. During migration, the join gate blocks new freeloaders while existing members get time to link their wallets and subscribe. See the [Admin Setup Guide](../telegram-bot/admin-setup-guide.md) for migration details.
 
 ---
 
@@ -105,6 +126,12 @@ Find answers to the most common questions about Subscrypts, organized by topic. 
 
 ??? question "Q: What is the SUBS token?"
     SUBS is an ERC-20 utility token deployed on Arbitrum One (chain ID 42161) that serves as the settlement and access token for all subscription services in the Subscrypts ecosystem. It does not represent equity, ownership, voting rights, or dividends — its value is derived exclusively from platform usage and demand. See [Tokenomics](../subscrypts/tokenomics.md).
+
+??? question "Q: Why does Subscrypts use its own token instead of USDC?"
+    SUBS is an architectural decision, not a branding exercise. The custom token enables a **burn-and-mint settlement model** that eliminates the traditional ERC-20 `approve`/`transferFrom` pattern entirely — meaning users never grant the contract blanket spending permission over their wallet. Each subscription has its own on-chain authorization (`isRecurring` + `remainingCycles`), so one subscription can never trigger a payment meant for another. Beyond the payment model, owning the settlement token gives Subscrypts **independence from external token governance** (e.g., USDC contract upgrades or address freezes), **resilience if an external token is compromised** (core SUBS subscriptions keep running), and the ability to **accept any ERC-20 as payment** by simply adding a swap path — without rearchitecting settlement logic. USDC payments are fully supported today through an atomic Uniswap V3 swap at the time of payment. For the full technical rationale and an honest look at the trade-offs, see [Why a Custom Settlement Token?](../subscrypts/tokenomics.md#why-a-custom-settlement-token).
+
+??? question "Q: What are the trade-offs of using a custom token?"
+    The SUBS model introduces real costs alongside its benefits. New users need to acquire SUBS or use the built-in USDC auto-swap (which handles conversion in one transaction). SUBS is more volatile than stablecoins, though this is mitigated by fiat-denominated pricing — merchants can price plans in USD, and the smart contract calculates the SUBS equivalent at the real-time market rate for each payment. Settlement quality depends on the depth of the SUBS/USDC liquidity pool on Uniswap, and USDC payments incur extra gas for the on-chain swap. The design philosophy is that security, independence, and user wallet protection outweigh the additional friction. See [Trade-offs](../subscrypts/tokenomics.md#trade-offs) for full details.
 
 ??? question "Q: What is the total supply of SUBS?"
     The total supply of SUBS is 120 million tokens, all minted at the Token Generation Event (TGE). This represents a fixed supply cap for all practical purposes. While the smart contract retains the technical capability to mint or burn tokens, any such change would require multi-signature approval, on-chain governance, and regulatory disclosure. See [Tokenomics](../subscrypts/tokenomics.md) for the full allocation breakdown.

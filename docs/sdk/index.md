@@ -1,7 +1,6 @@
 ---
 title: Subscrypts React SDK
 description: Official React SDK for Subscrypts decentralized subscriptions on Arbitrum. Hooks, components, and wallet connectors.
-status: new
 tags:
   - SDK
   - React

@@ -24,7 +24,7 @@ Think of it as **Stripe for Web3** — the same concept of automated recurring b
 2. A **subscriber** connects their wallet and subscribes — one transaction, no personal data
 3. The **smart contract** automatically processes payments each billing cycle
 4. The merchant receives **99% of each payment** in SUBS tokens; 1% goes to the protocol treasury
-5. Integrated services (like the **Discord Bot**) instantly grant or revoke access based on subscription status
+5. Integrated services (like the **Discord Bot**, **Telegram Bot**, and **Pulse**) instantly grant or revoke access, or notify you, based on subscription status
 
 That's it. No intermediaries, no chargebacks, no credit card processors.
 
@@ -51,17 +51,24 @@ flowchart TD
     subgraph OffChain["Off-Chain Interfaces"]
         DApp["Subscrypts dApp"]
         Bot["Discord Bot"]
+        TBot["Telegram Bot"]
+        Pulse["Subscrypts Pulse"]
         SDK["React SDK"]
         Custom["Your Custom App"]
     end
 
     S -->|"Connect wallet"| DApp
     S -->|"Link wallet"| Bot
+    S -->|"Link wallet"| TBot
+    S -->|"Monitor"| Pulse
     M -->|"Create plans"| DApp
     M -->|"Map roles"| Bot
+    M -->|"Map plans"| TBot
 
     DApp -->|"Read / write"| SC
     Bot -->|"Read state + events"| SC
+    TBot -->|"Read state + events"| SC
+    Pulse -->|"Read state"| SC
     SDK -->|"React hooks"| SC
     Custom -->|"ABI calls"| SC
 
@@ -75,6 +82,8 @@ flowchart TD
 | **[Smart Contract Suite](../smart-contract/introduction.md)** | On-chain engine for plan creation, payment processing, renewals, and governance. Uses a UUPS proxy with modular facets. |
 | **[Subscrypts dApp](../dapp/introduction.md)** | Web interface at [app.subscrypts.com](https://app.subscrypts.com) where merchants create plans and subscribers manage their subscriptions. |
 | **[Discord Bot](../discord-bot/introduction.md)** | Multi-tenant bot at [discord.onsubscrypts.com](https://discord.onsubscrypts.com) that automatically grants and revokes Discord roles based on on-chain subscription state. |
+| **[Telegram Bot](../telegram-bot/introduction.md)** | Multi-tenant bot at [telegram.onsubscrypts.com](https://telegram.onsubscrypts.com) that automatically manages Telegram group membership based on on-chain subscription state. |
+| **[Subscrypts Pulse](../pulse/introduction.md)** | Real-time subscription monitoring PWA at [pulse.subscrypts.com](https://pulse.subscrypts.com) with push notifications, multi-wallet support, and balance tracking. |
 | **[React SDK](../sdk/index.md)** | Open-source library (`@subscrypts/subscrypts-sdk-react`) with hooks, components, and wallet connectors for building subscription-powered React apps. |
 | **SUBS Token** | ERC-20 utility token on Arbitrum One. Fixed supply of 120 million. Used for all subscription payments and platform settlements. |
 
@@ -111,7 +120,7 @@ flowchart TD
 
 - **Discrete billing cycles** (monthly, quarterly, yearly) rather than continuous token streaming
 - **Fiat-denominated pricing** — merchants can price plans in USD while settling in SUBS
-- **Discord-native integration** — the only protocol with a built-in, multi-tenant Discord bot for community monetization
+- **Community-native integrations** — the only protocol with built-in, multi-tenant bots for both Discord and Telegram community monetization, plus a dedicated subscription monitoring PWA
 - **MiCAR compliance** — designed from day one for EU regulatory alignment
 - **Non-custodial USDC payments** — subscribers can pay with USDC, which is atomically swapped to SUBS in a single transaction via Permit2 + Uniswap V3
 
@@ -136,7 +145,7 @@ Subscribers who hold **USDC instead of SUBS** can still pay directly — the con
 **Merchants and creators** who want to:
 
 - Accept recurring crypto payments with minimal fees
-- Monetize Discord communities with automated access control
+- Monetize Discord and Telegram communities with automated access control
 - Reach a global audience without banking restrictions
 
 **Subscribers** who want to:

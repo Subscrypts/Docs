@@ -1,7 +1,6 @@
 ---
 title: SDK Quick Start — Build Your First Integration
 description: Add decentralized subscriptions to your React app in 5 minutes with the Subscrypts SDK.
-status: new
 tags:
   - SDK
   - quick-start

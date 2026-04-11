@@ -1,7 +1,6 @@
 ---
 title: SDK Code Examples — Integration Recipes
 description: Complete, copy-paste-ready integration recipes for common Subscrypts SDK use cases including paywalls, merchant dashboards, event listeners, and custom wallets.
-status: new
 tags:
   - sdk
   - examples

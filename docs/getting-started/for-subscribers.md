@@ -155,6 +155,7 @@ Subscrypts is **non-custodial** — this means:
 | "Transaction failed" | Check that you have enough balance and try again. Gas prices can fluctuate. |
 | "Subscription not showing" | Wait a moment for the transaction to confirm, then refresh the page |
 | "Discord role not applied" | The bot syncs roles periodically. Wait a moment, or run `/subs link` again in the server |
+| "Telegram invite not received" | Ensure you subscribed from the same wallet you linked. Check your Telegram DMs from the bot |
 
 !!! tip "Use a Web3-enabled browser on mobile"
     Standard mobile browsers (Safari, Chrome) don't support wallet connections. Use **MetaMask Mobile**, **Brave Browser**, or **Trust Wallet** on mobile devices.
@@ -166,5 +167,7 @@ Subscrypts is **non-custodial** — this means:
 - [What is Subscrypts?](what-is-subscrypts.md) — How the protocol works
 - [dApp Subscriber Guide](../dapp/subscriber-guide.md) — Detailed dApp walkthrough
 - [Discord Member Guide](../discord-bot/member-guide.md) — Subscribing via Discord
+- [Telegram Member Guide](../telegram-bot/member-guide.md) — Joining gated Telegram groups
+- [Subscrypts Pulse](../pulse/introduction.md) — Monitor your subscriptions and receive expiry notifications
 - [FAQ](../resources/faq.md) — Common questions answered
 - [Glossary](../resources/glossary.md) — Crypto terms explained

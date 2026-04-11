@@ -44,7 +44,11 @@ On top of the blockchain layer, [Subscrypts](https://subscrypts.com) provides us
 
 **[Subscrypts Discord Bot](https://discord.onsubscrypts.com)** – A community-focused integration that allows subscription status checks, notifications, and role-based access control within Discord servers. The bot interacts with the same on-chain contracts and does not custody funds.
 
-*Both the dApp and Discord Bot act as convenience layers only; all value transfer and enforcement occur on-chain.*
+**[Subscrypts Telegram Bot](https://telegram.onsubscrypts.com)** – A community-focused integration that manages Telegram group and channel membership based on on-chain subscription state. Like the Discord Bot, it reads from the same smart contracts and does not custody funds. Features include join gating, smart reconciliation, and single-use invite links.
+
+**[Subscrypts Pulse](https://pulse.subscrypts.com)** – A read-only subscription monitoring PWA that provides real-time dashboards and push notifications. It reads on-chain state but never writes or holds private keys.
+
+*The dApp, Discord Bot, Telegram Bot, and Pulse all act as convenience layers only; all value transfer and enforcement occur on-chain.*
 
 ---
 
@@ -56,6 +60,8 @@ flowchart TD
     subgraph OffChain["Off-Chain"]
         WebApp["Subscrypts dApp (Web Interface)"]
         DiscordBot["Subscrypts Discord Bot"]
+        TelegramBot["Subscrypts Telegram Bot"]
+        PulseApp["Subscrypts Pulse (monitoring)"]
     end
     subgraph OnChain["On-Chain (Arbitrum One)"]
         TokenContract["SUBS Token Contract"]
@@ -67,9 +73,13 @@ flowchart TD
     Subscriber["Subscriber (User)"] -->|uses| WebApp
     Merchant["Merchant (Service Provider)"] -->|uses| WebApp
     Subscriber -->|can also use| DiscordBot
+    Subscriber -->|can also use| TelegramBot
+    Subscriber -->|monitors via| PulseApp
 
     WebApp -->|triggers txns| SubContract
     DiscordBot -->|triggers txns| SubContract
+    TelegramBot -->|reads state| SubContract
+    PulseApp -->|reads state| SubContract
 
     SubContract -->|pulls SUBS from| Subscriber
     SubContract -->|transfers SUBS to| Merchant

@@ -1,7 +1,6 @@
 ---
 title: SDK Components Reference
 description: Complete reference for all Subscrypts React SDK UI components with props, types, and usage examples.
-status: new
 tags:
   - sdk
   - components

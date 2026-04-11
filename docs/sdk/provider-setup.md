@@ -1,7 +1,6 @@
 ---
 title: Provider Setup — SubscryptsProvider Configuration
 description: Configure the SubscryptsProvider for internal wallet management, external providers, or custom connectors.
-status: new
 tags:
   - SDK
   - provider

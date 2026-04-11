@@ -80,6 +80,8 @@ flowchart TD
     subgraph OffChain["Off-Chain Interfaces"]
         DApp["Subscrypts dApp (general UI)"]
         Bot["Subscrypts Discord Bot + createSubscription"]
+        TBot["Subscrypts Telegram Bot"]
+        Pulse["Subscrypts Pulse (monitoring)"]
     end
     subgraph OnChain["Smart Contract Suite (Arbitrum)"]
         Contracts["Subscription Contracts"]
@@ -89,6 +91,8 @@ flowchart TD
     Admins["Merchants"] -->|config + plan creation| Bot
     Bot -->|on-chain reads + writes| Contracts
     DApp -->|plan creation + management| Contracts
+    TBot -->|membership management| Contracts
+    Pulse -->|read-only monitoring| Contracts
     Contracts -->|emit events| Bot
 ```
 
@@ -128,7 +132,7 @@ The **[Subscrypts Discord Bot](https://discord.onsubscrypts.com)** introduces:
 Communities gain full control, subscribers retain sovereignty, and the platform scales globally with zero middlemen.
 
 !!! ecosystem "Subscrypts Ecosystem"
-    The Discord Bot is one interface in the broader Subscrypts ecosystem. For deeper context, explore the [Smart Contract Suite](../smart-contract/introduction.md), the [Subscrypts dApp](../dapp/introduction.md), and the [Subscrypts SDK](../sdk/index.md).
+    The Discord Bot is one interface in the broader Subscrypts ecosystem. For deeper context, explore the [Smart Contract Suite](../smart-contract/introduction.md), the [Subscrypts dApp](../dapp/introduction.md), the [Telegram Bot](../telegram-bot/introduction.md), [Subscrypts Pulse](../pulse/introduction.md), and the [Subscrypts SDK](../sdk/index.md).
 
 ## Learn More
 

@@ -78,6 +78,9 @@ Facet
 Gas
 :   The unit that measures the computational cost of executing transactions on Ethereum and its Layer-2 networks. On Arbitrum One, gas fees are typically $0.01-$0.05 per transaction, making recurring subscription payments economically viable.
 
+Grace Period
+:   A configurable time window during migration mode in which existing Telegram group members retain access without an active subscription, allowing them time to subscribe. Grace periods can be set between 1 and 90 days. See [Telegram Bot Admin Setup Guide](../telegram-bot/admin-setup-guide.md).
+
 Guild
 :   Discord's internal term for a server. In the Subscrypts Discord Bot, each guild has isolated plan-to-role mappings, admin scopes, and subscription configurations. See [Discord Bot Introduction](../discord-bot/introduction.md).
 
@@ -91,12 +94,20 @@ Halt States
 IDO (Initial DEX Offering)
 :   A token distribution method where tokens are launched directly on a decentralized exchange rather than through a private or centralized sale. The SUBS public sale takes place as an IDO on Uniswap V3 on Arbitrum One. See [Public Sale (IDO)](../subscrypts/public-sale.md).
 
+## J
+
+Join Gate
+:   An access control mechanism in the Subscrypts Telegram Bot that prevents non-subscribers from joining a gated Telegram group in real time. When a user attempts to join, the bot checks their subscription status on-chain and blocks unauthorized access before the user can see group content. See [Telegram Bot Subscription Sync](../telegram-bot/subscription-sync.md).
+
 ## L
 
 Layer 2 (L2)
 :   A scaling solution built on top of an existing blockchain (Layer 1) that processes transactions more quickly and cheaply while inheriting the base layer's security. Arbitrum One is a Layer-2 network on Ethereum.
 
 ## M
+
+Migration Mode
+:   A feature of the Subscrypts Telegram Bot that allows group owners to transition existing free groups to subscription-gated access. Migration mode provides a configurable grace period, member discovery tools, and automated reminders before enforcement begins. See [Telegram Bot Admin Setup Guide](../telegram-bot/admin-setup-guide.md).
 
 MiCAR (Markets in Crypto-Assets Regulation)
 :   The EU regulatory framework — Regulation (EU) 2023/1114 — that establishes disclosure and conduct requirements for crypto-asset offerings. Subscrypts publishes a MiCAR-compliant whitepaper and classifies SUBS as a utility token under this regulation. See [Compliance](../subscrypts/compliance.md).
@@ -131,7 +142,13 @@ Plan
 Proxy Contract
 :   A smart contract that serves as the permanent entry point for all interactions, forwarding calls to replaceable logic contracts via delegatecall. The Subscrypts proxy stores all persistent state and never changes its address, even as the underlying logic is upgraded. See [Architecture Overview](../smart-contract/architecture.md).
 
+PWA (Progressive Web App)
+:   A web application that can be installed on a device's home screen and used like a native app, without requiring an app store download. PWAs support push notifications, offline caching, and standalone mode. Subscrypts Pulse is distributed as a PWA. See [Pulse Installation](../pulse/installation.md).
+
 ## R
+
+Reconciler
+:   An automated background process in the Subscrypts Discord Bot and Telegram Bot that periodically verifies on-chain subscription states and adjusts access accordingly — granting roles or group membership for active subscriptions, and revoking them for expired ones. The reconciler is self-correcting and acts as a safety net alongside event-driven updates. See [Discord Bot Subscription Sync](../discord-bot/subscription-sync.md) and [Telegram Bot Subscription Sync](../telegram-bot/subscription-sync.md).
 
 Reconciliation
 :   The process of verifying that off-chain records (such as in the dApp or Discord Bot) match the authoritative on-chain state. Subscrypts supports reconciliation through FacetView read-only queries and event-driven synchronization.
@@ -142,7 +159,7 @@ Referral Bonus
 ## S
 
 SIWE (Sign-In with Ethereum)
-:   An authentication standard that lets users prove wallet ownership by signing a message, without exposing private keys or sharing personal data. The Subscrypts Discord Bot uses signature-based wallet linking for member verification.
+:   An authentication standard (EIP-4361) that lets users prove wallet ownership by signing a message, without exposing private keys or sharing personal data. The Subscrypts Discord Bot and Telegram Bot use SIWE-based wallet linking for member verification. See [Discord Bot Security & Trust](../discord-bot/security-and-trust.md) and [Telegram Bot Security & Trust](../telegram-bot/security-and-trust.md).
 
 Slippage
 :   The difference between the expected price of a token swap and the actual price at execution time, caused by market movement or low liquidity. Subscrypts enforces minimum output thresholds to protect subscribers and merchants during USDC-to-SUBS conversions.
@@ -155,6 +172,12 @@ SUBS Token
 
 Subscription
 :   An on-chain record linking a subscriber's wallet to a merchant's plan, tracking payment history, renewal dates, and active status. Each subscription has a unique auto-incremented ID and is stored in SubscryptsStorage. See [Core Logic](../smart-contract/core-logic.md).
+
+Subscrypts Pulse
+:   A real-time subscription monitoring PWA at [pulse.subscrypts.com](https://pulse.subscrypts.com) that provides dashboards, multi-wallet tracking, and push notifications for Subscrypts subscriptions on Arbitrum One. Pulse is read-only and custodian-free — it never asks for private keys. See [Pulse Introduction](../pulse/introduction.md).
+
+Subscrypts Telegram Bot
+:   A multi-tenant automation bot at [telegram.onsubscrypts.com](https://telegram.onsubscrypts.com) that manages Telegram group and channel membership based on on-chain subscription state. Features include join gating, smart reconciliation, SIWE wallet linking, single-use invite links, and migration mode for existing groups. See [Telegram Bot Introduction](../telegram-bot/introduction.md).
 
 ## T
 

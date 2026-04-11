@@ -261,7 +261,7 @@ Crypto subscriptions are no longer a futuristic concept -- they are a practical,
    Use the [Hooks API](../sdk/hooks-reference.md) for headless, fully customizable subscription logic. Browse [Code Examples](../sdk/code-examples.md) for copy-paste-ready recipes.
 
 5. **Join the community**
-   Connect with other builders and the Subscrypts team on [Discord](https://discord.gg/subscrypts) and [GitHub](https://github.com/nicejudy/subscrypts-sdk-react).
+   Connect with other builders and the Subscrypts team on [Discord](https://discord.gg/6uYzBUhAj7) and [GitHub](https://github.com/nicejudy/subscrypts-sdk-react).
 
 ---
 

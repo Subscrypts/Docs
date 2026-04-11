@@ -1,7 +1,6 @@
 ---
 title: SDK Wallet Connectors
 description: Architecture guide for the Subscrypts SDK wallet connector system, built-in connectors, and building custom connectors.
-status: new
 tags:
   - sdk
   - wallet
