@@ -177,6 +177,8 @@ Because Subscrypts controls the SUBS token contract, the passive subscription co
 
 If the protocol relied on an external token, triggering recurring payments would require dependency on external hooks, keeper networks, or separate automation services — adding complexity, cost, and potential points of failure. With SUBS, the settlement process runs natively within the contract itself, delivering a subscription experience as seamless as traditional recurring billing.
 
+For the full mechanics — the blockchain-mutation problem this solves, the social/network effect, per-transaction caps, the three manual collection functions, the middleware contract around `nextPaymentDate` and emitted events, and the scalability ceiling — see [Passive Batch Renewal and Settlement Semantics](../smart-contract/core-logic.md#passive-batch-renewal-and-settlement-semantics).
+
 ### Trade-offs
 
 Transparency matters, and the SUBS settlement model does introduce real costs:

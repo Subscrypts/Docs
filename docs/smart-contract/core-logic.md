@@ -253,6 +253,71 @@ This dual synchronization approach ensures that access management across all con
 
 ---
 
+## Passive Batch Renewal and Settlement Semantics
+
+Subscription services are, by nature, **time-triggered**: a payment is due at a specific moment regardless of whether any user interacts with the system. In a traditional, centralized payment stack, this is trivial — a server owned by a payment processor runs a cron job, mutates a database, and charges a card. On a public blockchain, *nothing mutates state without a transaction, and every transaction costs gas*. Subscrypts solves this with a combination of **passive batch collection**, **manual collection functions**, and a **middleware contract** built around `nextPaymentDate` and emitted events.
+
+### The Blockchain Mutation Problem
+
+A blockchain can only change state when an address submits (and pays for) a transaction. There is no internal scheduler, no cron, no privileged system process that can wake up at a specific block and mutate storage. Any design for recurring on-chain settlement must therefore answer a single question: *who pays to move the state, and when?*
+
+Options that rely on an always-on off-chain runner (a keeper network, a centralized automation service, a protocol-operated bot) reintroduce the exact single-point-of-dependency that an on-chain subscription protocol is supposed to remove. Subscrypts answers the question differently — by piggy-backing settlement onto activity that was going to happen anyway.
+
+### Embedded Passive Collection
+
+Because Subscrypts controls the SUBS ERC-20 contract, the `subscriptionCollectPassive()` routine is wired directly into **every SUBS token interaction** — Uniswap swaps, 1:1 SUBS transfers between wallets, subscription payments, and any other transfer that moves SUBS. Each of those transactions, as a side effect of what the caller actually intended to do, advances a bounded batch of due subscriptions through their next renewal cycle.
+
+This means renewal progress does not depend on a specific address, a keeper, or a scheduler. It is **free-rider settlement**: any SUBS activity, from any participant, anywhere in the ecosystem, contributes to closing the gap between truth-by-time and truth-by-storage for other users' subscriptions.
+
+### The Network Effect
+
+One user's transaction can renew many other users' subscriptions. A single swap that advances, illustratively, a few dozen pending renewals is effectively paying for *all* of those renewals out of one transaction's gas. This property has a clean scaling behaviour: **the more SUBS activity the ecosystem sees, the faster the full passive-collection cycle completes**. The protocol gets stronger the more it's used — every transaction contributes to settlement throughput whether the caller knows it or not.
+
+### Per-Transaction Cap
+
+Arbitrum, like every EVM chain, enforces a per-block and per-transaction gas ceiling. `subscriptionCollectPassive()` therefore processes subscriptions up to a bounded maximum per invocation — illustratively on the order of several dozen per trigger, *subject to the deployed contract's configuration and the current network gas limits*. These numbers are illustrative and subject to change as Arbitrum's protocol evolves; they are not a spec commitment. See [Gas Optimization & Scalability](gas-optimization.md) for the broader performance context.
+
+### Active / Manual Collection Functions
+
+The contract exposes three manual collection paths that anyone — merchants, subscribers, integrators, third-party automation — can call to **force renewal evaluation without waiting for passive batching**. Each pays its own gas but gives the caller precise control over which subscriptions are reconciled right now:
+
+| Function | Scope | Typical Caller |
+|---|---|---|
+| `subscriptionCollect(indexStart, indexEnd, maxCollect)` | Sweeps an index range across all subscriptions globally, stopping after `maxCollect` successful renewals. | General-purpose automation, catch-up workers, or any party willing to pay gas to advance protocol-wide settlement. |
+| `subscriptionCollectByPlan(planId, ...)` | Scopes the sweep to a single plan's subscribers. | Merchants who want to force-renew their own plan's active subscribers. |
+| `subscriptionCollectByAddress(subscriberAddress, ...)` | Scopes the sweep to one subscriber's subscriptions. | Subscribers or merchants who want a specific account's state reconciled immediately. |
+
+Manual and passive collection are complements, not alternatives. Passive is opportunistic — settlement that rides for free on unrelated SUBS activity. Manual is deliberate — a caller who is willing to pay gas *now* to get exact on-chain state *now*. Between the two, every subscription has multiple paths to stay current.
+
+### How Middleware Keeps State In Sync — Two Complementary Signals
+
+A correct Subscrypts integration — whether it's an official Subscrypts client or custom third-party middleware — uses **both** of the following signals, not one in isolation:
+
+**1. `nextPaymentDate` vs. current time (authoritative, pull)**
+
+Middleware **must** gate access by comparing the subscription's `nextPaymentDate` against the current block or system time. This is the source of truth. The on-chain record only advances when an interaction (passive or manual) touches it, so there is always a possible window in which *time-truth leads storage-truth*: the subscription has effectively lapsed but the chain hasn't yet been told. A middleware that respects `nextPaymentDate` handles that window correctly without any further work. A middleware that only reacts to events can briefly over-grant access during that gap.
+
+!!! warning "`nextPaymentDate` is authoritative"
+    Every middleware that gates access on Subscrypts subscriptions — official or third-party — must compare `nextPaymentDate` against current time, not rely solely on whether an `_subscriptionExpired` event has fired. Passive and manual collection close the gap between truth-by-time and truth-by-storage; respecting `nextPaymentDate` makes your integration correct regardless of when that closure actually happens on-chain.
+
+**2. Smart contract events (reactive, push)**
+
+Subscrypts emits `_subscriptionPay`, `_subscriptionRecurring`, `_subscriptionExpired`, `_subscriptionCancel`, and related events whenever on-chain state actually changes. Middleware should subscribe to these events to trigger **immediate reactions** — granting access, revoking access, updating dashboards, sending notifications, firing webhooks, reconciling internal caches — the moment a collection call (passive or manual) advances a subscription. Events are the push channel; they turn the protocol into a real-time integration surface.
+
+Combined, the two mechanisms form the full answer to the blockchain-subscription problem: passive and manual collection move the on-chain state forward, events push those movements to every listener the moment they happen, and `nextPaymentDate` lets middleware correctly gate access during the window between truth-by-time and truth-by-storage. This pattern is **language-agnostic** — any stack that can subscribe to JSON-RPC event logs and make view calls can implement it. See [Subscrypts — Platform-Agnostic Subscription Protocol](../subscrypts/platform-agnostic.md) for the broader integration context.
+
+### Scalability Ceiling
+
+Passive batch renewal is bounded by arithmetic: `(subscriptions processed per transaction) × (rate of SUBS interactions per second)` is the system's settlement throughput. If the total active subscription count grows to a point where a full pass through all due subscriptions takes longer than the *shortest* subscription cycle offered on the protocol, some renewals will begin to lag beyond their `nextPaymentDate`.
+
+The concrete risk scenario: a merchant creating sub-daily subscription frequencies (say, hourly or sub-hourly plans) combined with a very large subscriber base across the whole protocol. In that case, passive collection alone may not close the cycle in time. The on-chain record still eventually catches up on the next interaction, and `nextPaymentDate` remains authoritative throughout — middleware-gated access therefore remains correct — but callers who need storage-truth to match time-truth immediately should use one of the **manual collection functions** above to force reconciliation.
+
+### Why Arbitrum, Specifically for Batch Renewal
+
+Arbitrum One is the chosen deployment network in part because it directly raises the ceiling of this mechanism. Its high per-block gas limits allow larger batches per passive collection invocation; its low transaction cost means free-rider settlement is cheap to piggy-back on; and its ongoing protocol roadmap (Stylus, ArbOS upgrades, per-transaction gas ceiling increases) continues to raise the effective batch size and throughput. Every gas-ceiling increase on Arbitrum is a direct scalability increase for Subscrypts passive renewal. See [Gas Optimization & Scalability](gas-optimization.md) for the broader Arbitrum performance story.
+
+---
+
 ## Event Emission and Off-Chain Synchronization
 
 Every major on-chain action emits events that off-chain systems can subscribe to via Web3 listeners, SDKs, or webhook-based automation.
@@ -309,6 +374,8 @@ The **Core Logic Layer** in Subscrypts represents the automated heart of the pro
 - [Data Structures & Storage](data-structures.md) — how plans and subscriptions are stored on-chain
 - [Events & Off-Chain Integrations](events-integrations.md) — complete event reference and sync patterns
 - [Token Integration — SUBS Token](token-integration.md) — the settlement token powering all payments
+- [Platform-Agnostic Protocol](../subscrypts/platform-agnostic.md) — building custom middleware against the same on-chain state
+- [Gas Optimization & Scalability](gas-optimization.md) — Arbitrum throughput context for batch renewal
 - [dApp Merchant Guide](../dapp/merchant-guide.md) — how merchants interact with plans via the web interface
 
 !!! ecosystem "Related Components"

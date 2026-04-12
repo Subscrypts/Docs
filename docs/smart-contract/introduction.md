@@ -26,7 +26,7 @@ The Smart Contract Suite operates as the **core execution layer** connecting eve
 | **Smart Contracts**          | Provide the verifiable foundation of subscription logic, ensuring trustless, fair, and auditable transactions across all components.                                                                                                                                                                                                          |
 | **dApp**                     | A web-based interface where merchants and users interact with the blockchain to create subscription plans, manage payments, and view active subscriptions. ([Subscrypts dApp](https://app.subscrypts.com))                                                                                                                                    |
 | **Discord Bot**              | Extends on-chain logic into community environments, automating role assignments and permissions based on real-time subscription states. ([Subscrypts Discord Bot](https://discord.onsubscrypts.com))                                                                                                                                          |
-| **Third-Party Integrations** | Custom-developed interfaces, merchant dashboards, or external applications can be built directly on top of the Subscrypts Smart Contract Suite, enabling developers to integrate blockchain-based subscription management into their own platforms or services without relying on the official [Subscrypts dApp](https://app.subscrypts.com). |
+| **Third-Party Integrations** | Custom-developed interfaces, merchant dashboards, mobile apps, game servers, IoT devices, and external services can be built directly on top of the Subscrypts Smart Contract Suite using the [published ABI](abi-reference.md) and any blockchain RPC library (ethers.js, ethers.py, web3.py, viem, ethers-rs, web3j, Nethereum, web3.swift, web3dart, go-ethereum, and more). Subscrypts is platform-agnostic: any runtime that can speak JSON-RPC to an Arbitrum node can integrate. See [Platform-Agnostic Protocol](../subscrypts/platform-agnostic.md). |
 
 ---
 
@@ -102,6 +102,7 @@ Traditional subscription models rely on centralized intermediaries for payment p
 - [Smart Contract Design Philosophy](design.md) — understand the principles behind every architectural decision
 - [Architecture Overview](architecture.md) — explore the modular UUPS proxy design in detail
 - [Core Logic & Subscription Lifecycle](core-logic.md) — learn how plans, subscriptions, and payments work on-chain
+- [Platform-Agnostic Protocol](../subscrypts/platform-agnostic.md) — how any application in any language can integrate Subscrypts
 - [Subscrypts dApp Introduction](../dapp/introduction.md) — the primary web interface for interacting with the contracts
 - [Discord Bot Introduction](../discord-bot/introduction.md) — how on-chain subscription states drive community access
 

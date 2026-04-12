@@ -85,7 +85,7 @@ The **`FacetPaymentUSDC`** and **`FacetSubscription`** modules are optimized for
 * Plan verification and expiration checks occur off-chain via event listeners in the **[Subscrypts dApp](https://app.subscrypts.com)** or **[Subscrypts Discord Bot](https://discord.onsubscrypts.com)** where possible, reducing redundant contract reads.
 
 **Batch Renewal Example:**
-Any operation that routes through the internal subscription update flow (e.g. passive collection helpers or automated runners) can trigger the passive renewal logic. When this path is executed in batch mode, it processes up to **N** subscriptions in one call, amortizing gas cost per user.
+Any operation that routes through the internal subscription update flow (e.g. passive collection helpers or automated runners) can trigger the passive renewal logic. When this path is executed in batch mode, it processes up to **N** subscriptions in one call, amortizing gas cost per user. For the complete behaviour — how passive collection piggy-backs on every SUBS interaction, how manual collection functions complement it, and the middleware contract around `nextPaymentDate` — see [Passive Batch Renewal and Settlement Semantics](core-logic.md#passive-batch-renewal-and-settlement-semantics).
 
 ```mermaid
 sequenceDiagram

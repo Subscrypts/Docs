@@ -16,6 +16,8 @@ tags:
 
 Think of it as **Stripe for Web3** — the same concept of automated recurring billing, but instead of credit cards and bank accounts, payments flow directly between crypto wallets using smart contracts on a public blockchain.
 
+Subscrypts is also **platform-agnostic**. The official dApp, Discord Bot, Telegram Bot, Pulse, and React SDK are examples of what integrations can look like — but the protocol itself can be embedded in anything that has an internet connection and a blockchain library. Any language (JavaScript, Python, Rust, Go, Java, Swift, C#, Dart, and more) and any platform (web, mobile, server-side, game, IoT, custom plugin) can read the same on-chain subscription state. As a direct benefit, **a single on-chain subscription can gate access across every platform a merchant integrates simultaneously** — one payment, one subscription, everywhere. See [Platform-Agnostic Protocol](../subscrypts/platform-agnostic.md).
+
 ---
 
 ## How It Works — In 30 Seconds

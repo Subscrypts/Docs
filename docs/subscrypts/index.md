@@ -16,6 +16,7 @@ Everything about the Subscrypts project — from its vision and architecture to 
 -   [:octicons-arrow-right-24: **Vision**](vision.md) — Long-term goals and philosophy
 -   [:octicons-arrow-right-24: **Solution**](solution.md) — How smart contracts replace traditional billing
 -   [:octicons-arrow-right-24: **Architecture**](architecture.md) — On-chain and off-chain components
+-   [:octicons-arrow-right-24: **Platform-Agnostic**](platform-agnostic.md) — Any language, any platform, one on-chain subscription
 -   [:octicons-arrow-right-24: **Use Cases**](use-cases.md) — SaaS, gaming, communities, IoT, and more
 -   [:octicons-arrow-right-24: **Tokenomics**](tokenomics.md) — SUBS token supply, distribution, and vesting
 -   [:octicons-arrow-right-24: **Public Sale**](public-sale.md) — IDO structure and circulation schedule

@@ -38,7 +38,7 @@ In practice, the total SUBS supply is **fixed at 120 million tokens**, all minte
 
 ## Off-Chain Components
 
-On top of the blockchain layer, [Subscrypts](https://subscrypts.com) provides user-facing applications that simplify interaction with the smart contracts.
+On top of the blockchain layer, [Subscrypts](https://subscrypts.com) provides user-facing applications that simplify interaction with the smart contracts. These are **official reference integrations** — they exist to accelerate adoption by giving merchants and subscribers batteries-included entry points. They are not the only way to use the protocol: any third party can build equivalent (or entirely different) integrations directly against the Smart Contract Suite. See [Platform-Agnostic Protocol](platform-agnostic.md) for the full developer-integration story.
 
 **[Subscrypts dApp](https://app.subscrypts.com)** – A web-based interface allowing merchants to create and manage subscription plans and subscribers to manage their subscriptions. The dApp abstracts blockchain complexity by handling contract interactions after users confirm actions in their wallet.
 
@@ -49,6 +49,8 @@ On top of the blockchain layer, [Subscrypts](https://subscrypts.com) provides us
 **[Subscrypts Pulse](https://pulse.subscrypts.com)** – A read-only subscription monitoring PWA that provides real-time dashboards and push notifications. It reads on-chain state but never writes or holds private keys.
 
 *The dApp, Discord Bot, Telegram Bot, and Pulse all act as convenience layers only; all value transfer and enforcement occur on-chain.*
+
+Because the blockchain holds every subscription's authoritative state, **Subscrypts is a platform-agnostic protocol**: any application that can speak blockchain RPC — in any language, on any runtime, on any platform — can read subscription state and transact against the same contracts as the official clients. The dApp, bots, Pulse, and React SDK are examples of what that looks like; third-party integrators can build any other client against the same surface. See [Platform-Agnostic Protocol](platform-agnostic.md) for the full picture, including how a single subscription can gate access across multiple platforms simultaneously.
 
 ---
 

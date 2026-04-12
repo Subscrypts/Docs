@@ -93,7 +93,7 @@ Subscrypts is optimized for **Arbitrum One**, leveraging its low gas fees and hi
 Scalability in the contract layer is achieved through:
 
 * **Gas-efficient mappings and delegatecalls** for low-cost logic routing.
-* **Passive collection routines** (e.g., `subscriptionCollectPassive`) that batch multiple renewals within a single transaction.
+* **Passive collection routines** (e.g., `subscriptionCollectPassive`) that batch multiple renewals within a single transaction. See [Passive Batch Renewal and Settlement Semantics](core-logic.md#passive-batch-renewal-and-settlement-semantics) for the full mechanics.
 * **Composable logic** via interchangeable facets—allowing vertical scaling without redeploying the proxy.
 
 This enables the ecosystem to scale horizontally across merchants and users while maintaining operational efficiency on-chain.
